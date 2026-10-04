@@ -1,32 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINEスタンプ販売ページ</title>
-    <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; background: #f8f9fa; text-align: center; color: #333; }
-        .container { max-width: 500px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.5rem; margin-bottom: 10px; }
-        p { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
-        .main-img { width: 100%; max-width: 250px; height: auto; margin-bottom: 20px; }
-        .btn { display: inline-block; width: 80%; background: #06C755; color: #fff; text-decoration: none; padding: 15px; font-weight: bold; border-radius: 30px; font-size: 1.1rem; box-shadow: 0 4px 0 #059b42; transition: 0.2s; }
-        .btn:active { transform: translateY(4px); box-shadow: none; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LINEスタンプ ポータル - モックアップ</title>
+<style>
+:root{
+  --green:#16b866; --ink:#263238; --muted:#718096; --line:#e9edf2;
+  --bg:#f7f9fc; --card:#fff; --pink:#ff6fa8; --blue:#4ba8e8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",Meiryo,sans-serif}
+a{text-decoration:none;color:inherit}
+.topbar{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:10}
+.wrap{width:min(1180px,calc(100% - 28px));margin:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}
+.logo{width:38px;height:38px;border-radius:13px;background:var(--green);display:grid;place-items:center;color:white;font-size:22px}
+.nav{margin-left:auto;display:flex;gap:18px;font-size:13px;color:#59636f}
+.nav b{color:var(--green)}
+.hero{padding:24px 0 14px}
+.hero-box{background:linear-gradient(120deg,#ffe8f2,#fff4d7 52%,#e8f5ff);border:1px solid #f1e7ed;border-radius:24px;padding:28px 30px;display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+.hero h1{margin:0 0 8px;font-size:clamp(25px,4vw,40px);line-height:1.25}
+.hero p{margin:0;color:#697586}
+.hero-art{font-size:85px;letter-spacing:-18px;transform:rotate(-4deg);white-space:nowrap}
+.search{display:flex;margin-top:18px;background:white;border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 8px 28px #2030400d}
+.search input{border:0;outline:0;flex:1;padding:12px 14px;font-size:15px;min-width:0}
+.search button{border:0;border-radius:12px;background:var(--green);color:#fff;padding:0 20px;font-weight:800}
+.section{padding:18px 0}
+.section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:12px}
+.section-title h2{font-size:20px;margin:0}
+.section-title small{color:var(--muted)}
+.categories{display:grid;grid-template-columns:repeat(9,1fr);gap:9px}
+.cat{background:white;border:1px solid var(--line);border-radius:16px;padding:12px 6px;text-align:center;font-size:12px;font-weight:800;transition:.2s}
+.cat:hover{transform:translateY(-2px);box-shadow:0 8px 20px #22335512}
+.cat .icon{width:42px;height:42px;border-radius:14px;margin:0 auto 7px;display:grid;place-items:center;font-size:22px}
+.pink{background:#ffe7f1;color:#e84e89}.yellow{background:#fff2c9;color:#d99a00}.blue{background:#e6f5ff;color:#258ed1}
+.purple{background:#efe8ff;color:#7751c8}.green{background:#e7f8ec;color:#3d9e59}.orange{background:#ffeadb;color:#d96e29}.gray{background:#eef0f3;color:#5c6670}
+.quick{display:flex;gap:8px;flex-wrap:wrap}
+.quick button{border:0;border-radius:999px;padding:9px 14px;background:#fff;border:1px solid var(--line);font-weight:800;color:#53606d}
+.quick button:nth-child(1),.quick button:nth-child(5){background:#fff0f5;color:#e34e89}
+.quick button:nth-child(2),.quick button:nth-child(6){background:#edf7ff;color:#287db0}
+.quick button:nth-child(3),.quick button:nth-child(7){background:#eefaf0;color:#3d9655}
+.quick button:nth-child(4),.quick button:nth-child(8){background:#fff6dc;color:#aa7c00}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.sticker{background:#fff;border:1px solid var(--line);border-radius:18px;padding:8px;position:relative}
+.sticker img{width:100%;display:block;border-radius:13px}
+.rank{position:absolute;top:14px;left:14px;background:#fff;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:900;box-shadow:0 3px 10px #0001}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tag{font-size:11px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 9px;color:#697586}
+.more{text-align:center;padding:22px 0}
+.more button{border:1px solid #dce2e8;background:#fff;border-radius:999px;padding:11px 22px;font-weight:800}
+footer{margin-top:35px;background:#fff;border-top:1px solid var(--line);padding:30px 0;color:#75808c;font-size:12px}
+.mobile-nav{display:none}
+
+@media(max-width:850px){
+  .wrap{width:min(100% - 18px,620px)}
+  .topbar{height:58px}
+  .nav{display:none}
+  .brand{font-size:16px}
+  .logo{width:34px;height:34px}
+  .hero{padding-top:12px}
+  .hero-box{padding:20px;border-radius:20px}
+  .hero-art{font-size:55px;letter-spacing:-12px}
+  .categories{grid-template-columns:repeat(5,1fr)}
+  .cat{padding:9px 4px}
+  .grid{grid-template-columns:repeat(3,1fr);gap:9px}
+  .section{padding:13px 0}
+  .section-title h2{font-size:18px}
+  .mobile-nav{display:flex;position:sticky;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom));box-shadow:0 -5px 20px #0000000b}
+  .mobile-nav a{font-size:10px;text-align:center;color:#78818b}
+  .mobile-nav b{display:block;font-size:20px;line-height:22px;color:#65707c}
+  .mobile-nav a:first-child,.mobile-nav a:first-child b{color:var(--green)}
+}
+@media(max-width:430px){
+  .hero-box{min-height:145px}
+  .hero p{font-size:12px}
+  .hero-art{font-size:45px}
+  .categories{grid-template-columns:repeat(5,1fr);gap:6px}
+  .cat .icon{width:36px;height:36px;font-size:18px}
+  .cat{font-size:10px}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .search button{padding:0 13px}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- スタンプのタイトル -->
-        <h1>【新作】ゆるかわ動物スタンプ</h1>
-        <!-- スタンプの説明文 -->
-        <p>毎日使える可愛い動物たちのスタンプです！</p>
-        
-        <!-- スタンプの紹介画像（後であなたの画像に変えられます） -->
-        <img src="https://placehold.co" alt="スタンプ画像" class="main-img">
-        
-        <br>
-        <!-- LINE STOREへのリンク（URLをあなたのスタンプページに変えてください） -->
-        <a href="https://line.me" target="_blank" class="btn">LINE STOREで見る</a>
+<header class="topbar">
+  <div class="wrap" style="display:flex;align-items:center">
+    <div class="brand"><div class="logo">☺</div><div>LINEスタンプ<br>スタンプポータル</div></div>
+    <div class="nav"><a href="#">ホーム</a><a href="#">カテゴリ</a><a href="#">人気ランキング</a><a href="#">お気に入り</a><b>☰</b></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-box">
+      <div>
+        <h1>スタンプで、<br>もっと気持ちを伝えよう。</h1>
+        <p>かわいい・楽しい・使いやすいスタンプを、気分や色から探せます。</p>
+      </div>
+      <div class="hero-art">💗 💛 💙</div>
     </div>
+    <div class="search">
+      <input placeholder="キーワードで探す（例：ありがとう、ハート、犬）">
+      <button>検索</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>ジャンルから探す</h2><small>まずはここから</small></div>
+    <div class="categories">
+      <div class="cat"><div class="icon pink">♥</div>あいさつ</div>
+      <div class="cat"><div class="icon yellow">☺</div>リアクション</div>
+      <div class="cat"><div class="icon blue">•••</div>一言・返事</div>
+      <div class="cat"><div class="icon pink">♡</div>感情・気持ち</div>
+      <div class="cat"><div class="icon purple">▣</div>季節・イベント</div>
+      <div class="cat"><div class="icon green">⌂</div>日常・生活</div>
+      <div class="cat"><div class="icon green">🐾</div>動物・生き物</div>
+      <div class="cat"><div class="icon orange">🍴</div>食べ物</div>
+      <div class="cat"><div class="icon gray">•••</div>その他</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>色・雰囲気から探す</h2><small>キャラクターではなく「見た目」で分類</small></div>
+    <div class="categories">
+      <div class="cat"><div class="icon pink">♥</div>ピンク・かわいい</div>
+      <div class="cat"><div class="icon yellow">☀</div>イエロー・元気</div>
+      <div class="cat"><div class="icon blue">●</div>ブルー・さわやか</div>
+      <div class="cat"><div class="icon purple">★</div>パープル・大人</div>
+      <div class="cat"><div class="icon green">♧</div>グリーン・自然</div>
+      <div class="cat"><div class="icon orange">♥</div>レッド・情熱</div>
+      <div class="cat"><div class="icon gray">●</div>モノトーン</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>一発返信！よく使う言葉</h2><small>LINEを開いたまま、サッと返せる</small></div>
+    <div class="quick">
+      <button>ありがとう</button><button>了解です</button><button>OK！</button><button>ごめんね</button>
+      <button>がんばって</button><button>おつかれさま</button><button>またね</button><button>おやすみ</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>人気のスタンプ</h2><small>まずは定番から</small></div>
+    <div class="grid">
+      <div class="sticker"><span class="rank">1</span><img src="assets/heart_thanks.svg"></div>
+      <div class="sticker"><span class="rank">2</span><img src="assets/yellow_ok.svg"></div>
+      <div class="sticker"><span class="rank">3</span><img src="assets/green_ganbatte.svg"></div>
+      <div class="sticker"><span class="rank">4</span><img src="assets/blue_reply.svg"></div>
+      <div class="sticker"><span class="rank">5</span><img src="assets/pink_cute.svg"></div>
+      <div class="sticker"><span class="rank">6</span><img src="assets/heart_love.svg"></div>
+      <div class="sticker"><img src="assets/orange_mata.svg"></div>
+      <div class="sticker"><img src="assets/blue_sleep.svg"></div>
+      <div class="sticker"><img src="assets/purple_good.svg"></div>
+      <div class="sticker"><img src="assets/green_thanks.svg"></div>
+      <div class="sticker"><img src="assets/mono_yes.svg"></div>
+      <div class="sticker"><img src="assets/heart_ok.svg"></div>
+    </div>
+    <div class="more"><button>もっと見る →</button></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>このポータルの考え方</h2><small>1万個以上でも迷子にならないために</small></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div class="sticker" style="padding:18px"><b>① 用途で探す</b><p style="color:#718096;font-size:13px;line-height:1.7">「ありがとう」「了解」など、今送りたい言葉から探せる。</p></div>
+      <div class="sticker" style="padding:18px"><b>② 色で探す</b><p style="color:#718096;font-size:13px;line-height:1.7">キャラ名を覚えていなくても、ピンク・青などで絞れる。</p></div>
+      <div class="sticker" style="padding:18px"><b>③ タグを重ねる</b><p style="color:#718096;font-size:13px;line-height:1.7">「ハート＋かわいい＋ありがとう」のように複数条件で整理。</p></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© LINEスタンプ ポータル（モックアップ）　｜　販売ページへの導線は後から追加できます。</div></footer>
+
+<nav class="mobile-nav">
+  <a href="#"><b>⌂</b>ホーム</a>
+  <a href="#"><b>◫</b>カテゴリ</a>
+  <a href="#"><b>⌕</b>検索</a>
+  <a href="#"><b>♡</b>お気に入り</a>
+  <a href="#"><b>☰</b>メニュー</a>
+</nav>
 </body>
 </html>
